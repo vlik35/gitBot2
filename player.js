@@ -352,30 +352,20 @@ async function sendMessageWithPermissionsCheck(channel, components, attachment) 
             const message = await channel.send(messageOptions);
             return message;
         } catch (sendError) {
-            // Fallback: remove media gallery/attachments and still send core controls/embed.
+            // Fallback: remove media gallery/attachments and retry with core controls only.
             console.log("Error sending message with media, attempting fallback without media:", sendError.message);
-            // const fallbackComponents = stripMediaGallery(components);
-            // const fallbackOptions = {
-            //     components: fallbackComponents,
-            //     flags: MessageFlags.IsComponentsV2
-            // };
-            // if (safeAttachment) {
-            //     fallbackOptions.files = [safeAttachment];
-            // }
-            // try {
-            //     const message = await channel.send(fallbackOptions);
-            //     return message;
-            // } catch (_) {
-            //     const minimalOptions = {
-            //         components: fallbackComponents,
-            //         flags: MessageFlags.IsComponentsV2
-            //     };
-            //     if (safeAttachment) {
-            //         minimalOptions.files = [safeAttachment];
-            //     }
-            //     const message = await channel.send(minimalOptions);
-            //     return message;
-            // }
+            const fallbackComponents = stripMediaGallery(components);
+            const fallbackOptions = {
+                components: fallbackComponents,
+                flags: MessageFlags.IsComponentsV2
+            };
+            try {
+                const message = await channel.send(fallbackOptions);
+                return message;
+            } catch (fallbackError) {
+                console.error("Fallback send failed:", fallbackError.message);
+                return null;
+            }
         }
     } catch (error) {
         const langSync = getLangSync();
@@ -598,7 +588,7 @@ async function initializePlayer(client) {
                 t,
                 config.showProgressBar !== false ? createProgressBar(0, track.info.length) : null,
                 0,
-                attachment && canAttachFiles ? 'attachment://song-banner.png' : null,
+                null,
                 actionRows,
                 { paused: player.paused, loop: player.loop, currentPosition: 0, queueLength: player.queue.length, commandMentionMap }
             );
@@ -832,7 +822,7 @@ async function refreshNowPlayingPanel(client, guildId) {
     if (useGeneratedSongCard) {
         if (cachedMedia?.cardBuffer && canAttachFiles) {
             mediaAttachment = new AttachmentBuilder(cachedMedia.cardBuffer, { name: 'song-banner.png' });
-            mediaUrl = 'attachment://song-banner.png';
+            // Avoid using attachment:// URLs in MediaGalleryBuilder; not all component media paths support local attachments.
         } else if (cachedMedia?.mediaUrl) {
             mediaUrl = cachedMedia.mediaUrl;
         }
@@ -1604,7 +1594,7 @@ async function startProgressUpdates(client, guildId, message, player, track) {
                         if (useGeneratedSongCard) {
                             if (cachedMedia?.cardBuffer && canAttachFiles) {
                                 mediaAttachment = new AttachmentBuilder(cachedMedia.cardBuffer, { name: 'song-banner.png' });
-                                mediaUrl = 'attachment://song-banner.png';
+                                // Avoid using attachment:// URLs in MediaGalleryBuilder for progressive updates.
                             } else if (cachedMedia?.mediaUrl) {
                                 mediaUrl = cachedMedia.mediaUrl;
                             }

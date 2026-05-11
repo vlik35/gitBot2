@@ -358,15 +358,20 @@ async function sendMessageWithPermissionsCheck(channel, components, attachment) 
                 components: fallbackComponents,
                 flags: MessageFlags.IsComponentsV2
             };
+            if (safeAttachment) {
+                fallbackOptions.files = [safeAttachment];
+            }
             try {
                 const message = await channel.send(fallbackOptions);
                 return message;
             } catch (_) {
-             
                 const minimalOptions = {
                     components: fallbackComponents,
                     flags: MessageFlags.IsComponentsV2
                 };
+                if (safeAttachment) {
+                    minimalOptions.files = [safeAttachment];
+                }
                 const message = await channel.send(minimalOptions);
                 return message;
             }

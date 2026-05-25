@@ -540,6 +540,10 @@ async function initializePlayer(client) {
 
         try {
             await cleanupPreviousTrackMessages(channel, guildId);
+
+            if (config.announceNowPlaying === false) {
+                return;
+            }
             
             await new Promise(resolve => setTimeout(resolve, 500));
             const canAttachFiles = channel.permissionsFor(channel.guild.members.me)?.has(PermissionsBitField.Flags.AttachFiles);

@@ -6,7 +6,7 @@ const { getLang } = require('../../utils/languageLoader');
 
 const data = new SlashCommandBuilder()
   .setName('loop')
-  .setDescription('Repeat the current track permanently');
+  .setDescription('Toggle repeat for the current track');
 
 module.exports = {
   data,
@@ -40,9 +40,10 @@ module.exports = {
       }
 
       if (player.loop === 'track') {
+        player.setLoop('none');
         return await sendSuccessResponse(
           interaction,
-          t.alreadyActivated || '🔁 **¡El bucle de pista ya está activo!**'
+          t.loopDisabled || '❌ **¡El bucle está desactivado!**'
         );
       }
 

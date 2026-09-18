@@ -26,11 +26,11 @@ module.exports = {
   errorLog: "", 
   nodes: [
       {
-         name: "archost",
-         password: "https://discord.gg/archost",
-         host: "89.106.84.47",
-         port: "2555",
-         secure: "false"
+          name: "DEVOURY",
+          password: "md",
+          host: "node.fynexbot.in",
+          port: 2007,
+          secure: false
     }
   ]
 }

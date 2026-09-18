@@ -2,7 +2,7 @@
 
 module.exports = {
   TOKEN: "",
-  language: "en",
+  language: "es",
   ownerID: ["962994407651553302", ""], 
   mongodbUri : "mongodb+srv://shiva:shiva@musicbotyt.ouljywv.mongodb.net/?retryWrites=true&w=majority",
   spotifyClientId : "d92baed9605a45a39ed7c2a2d960b1c1",
@@ -25,6 +25,20 @@ module.exports = {
   lowMemoryMode: true,   // Performance optimizations for low-memory environments (512MB RAM)
   errorLog: "", 
   nodes: [
+            {
+            name: "GlaceYT",
+            password: "glace",
+            host: "de-01.strixnodes.com",
+            port: 2010,
+            secure: false
+          },
+            {
+            name: "GlaceYT-2",
+            password: "glace",
+            host: "de-01.strixnodes.com",
+            port: 2028,
+            secure: false
+          },
             {
             name: "archost",
             password: "https://discord.gg/archost",

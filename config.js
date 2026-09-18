@@ -26,11 +26,11 @@ module.exports = {
   errorLog: "", 
   nodes: [
       {
-        name: "D-Radio",
-        password: "D-Radio",
-        host: "ishaan.hidencloud.com",
-        port: 24611,
-        secure: false
+         name: "archost",
+         password: "https://discord.gg/archost",
+         host: "89.106.84.47",
+         port: "2555",
+         secure: "false"
     }
   ]
 }

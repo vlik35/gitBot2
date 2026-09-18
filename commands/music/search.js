@@ -173,22 +173,6 @@ module.exports = {
             }
 
             const tracks = resolve.tracks.slice(0, 5);
-
-            console.log("\n========== SEARCH RESULTS ==========");
-
-            tracks.forEach((track, index) => {
-                console.log({
-                    index,
-                    title: track.info?.title,
-                    author: track.info?.author,
-                    identifier: track.info?.identifier,
-                    uri: track.info?.uri,
-                    sourceName: track.info?.sourceName,
-                    encoded: track.encoded?.substring(0, 30) + "..."
-                });
-            });
-            
-            console.log("====================================\n");
           
             if (tracks.length === 0) {
                 return sendErrorResponse(
@@ -271,14 +255,6 @@ module.exports = {
 
                 const selectedTrack = tracks[trackIndex];
                 selectedTrack.info.requester = interaction.user.username;
-              console.log("\n========== SELECTED TRACK ==========");
-              console.log({
-                  title: selectedTrack.info?.title,
-                  identifier: selectedTrack.info?.identifier,
-                  uri: selectedTrack.info?.uri,
-                  sourceName: selectedTrack.info?.sourceName
-              });
-              console.log("====================================\n");
                 player.queue.add(selectedTrack);
                 requesters.set(selectedTrack.info.uri, interaction.user.username);
 

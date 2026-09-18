@@ -26,11 +26,11 @@ module.exports = {
   errorLog: "", 
   nodes: [
       {
-          name: "DEVOURY",
-          password: "md",
-          host: "node.fynexbot.in",
-          port: 2007,
-          secure: false
-    }
+  name: "GlaceYT",
+  password: "glace",
+  host: "de-01.strixnodes.com",
+  port: 2010,
+  secure: false
+}
   ]
 }

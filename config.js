@@ -52,6 +52,13 @@ module.exports = {
             host: "node.fynexbot.in",
             port: 2007,
             secure: false
+          }, 
+          {  
+            name: "Lavalink Vlik Node",
+            password: "sexito",
+            host: "78.154.103.50",
+            port: 10384,
+            secure: false
           }
   ]
 }

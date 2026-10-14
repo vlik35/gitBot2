@@ -38,7 +38,7 @@ module.exports = {
             host: "de-01.strixnodes.com",
             port: 2028,
             secure: false
-          },
+          }/*,
             {
             name: "archost",
             password: "https://discord.gg/archost",
@@ -59,6 +59,6 @@ module.exports = {
             host: "78.154.103.50",
             port: 10384,
             secure: false
-          }
+          } */
   ]
 }

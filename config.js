@@ -31,14 +31,14 @@ module.exports = {
             host: "de-01.strixnodes.com",
             port: 2010,
             secure: false
-          },
+          }/*,
             {
             name: "GlaceYT-2",
             password: "glace",
             host: "de-01.strixnodes.com",
             port: 2028,
             secure: false
-          }/*,
+          },
             {
             name: "archost",
             password: "https://discord.gg/archost",
